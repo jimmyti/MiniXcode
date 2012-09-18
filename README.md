@@ -8,6 +8,12 @@ You can disable the popup from the _View_ menu if you find it distracting, the k
 
 ![Screenshot](http://github.com/omz/MiniXcode/raw/master/Screenshot.png)
 
+## New feature: Support editor mode selection
+
+You can now change the editor mode in Xcode via the small segmented control towards the right of the title bar. It is designed to mimic the standard editor mode switcher arrangement - standard editor, assistant editor, versions editor.
+
+![Screenshot](http://github.com/omz/MiniXcode/raw/master/Screenshot-editorMode.png)
+
 ## Installation
 
 Simply build the Xcode project and restart Xcode. The plugin will automatically be installed in `~/Library/Application Support/Developer/Shared/Xcode/Plug-ins`. To uninstall, just remove the plugin from there (and restart Xcode).
