@@ -12,7 +12,7 @@ You can disable the popup from the _View_ menu if you find it distracting, the k
 
 You can now change the editor mode in Xcode via the small segmented control towards the right of the title bar. It is designed to mimic the standard editor mode switcher arrangement - standard editor, assistant editor, versions editor.
 
-![Screenshot](http://github.com/omz/MiniXcode/raw/master/Screenshot-editorMode.png)
+![Screenshot](http://github.com/jimmyti/MiniXcode/raw/master/Screenshot-editorMode.png)
 
 ## Installation
 
