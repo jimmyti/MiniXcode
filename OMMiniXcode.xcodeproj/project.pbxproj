@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		7F2EB89C145057F200E97A87 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F2EB899145057EA00E97A87 /* AppKit.framework */; };
 		7FFE01F215FE1B3300CB8659 /* OMSchemeSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFE01F115FE1B3300CB8659 /* OMSchemeSelectionView.m */; };
+		9B0B923C160833660066886C /* TB_ViewSegment-Assistant.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB9C6311606E47A000EE9A7 /* TB_ViewSegment-Assistant.png */; };
+		9B0B923D160833660066886C /* TB_ViewSegment-Basic.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB9C6321606E47A000EE9A7 /* TB_ViewSegment-Basic.png */; };
+		9B0B923E160833660066886C /* TB_ViewSegment-Versions.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB9C6331606E47A000EE9A7 /* TB_ViewSegment-Versions.png */; };
+		9BB9C62F1606D993000EE9A7 /* JTEditorSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB9C62E1606D993000EE9A7 /* JTEditorSelectionView.m */; };
 		DA1B5D020E64686800921439 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 089C1672FE841209C02AAC07 /* Foundation.framework */; };
 		DA37E2DC0E6291C8001BDFEF /* OMMiniXcode.m in Sources */ = {isa = PBXBuildFile; fileRef = DA37E2DB0E6291C8001BDFEF /* OMMiniXcode.m */; };
 /* End PBXBuildFile section */
@@ -21,6 +25,11 @@
 		7FFE01F115FE1B3300CB8659 /* OMSchemeSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMSchemeSelectionView.m; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* OMMiniXcode.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OMMiniXcode.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BB9C62D1606D993000EE9A7 /* JTEditorSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTEditorSelectionView.h; sourceTree = "<group>"; };
+		9BB9C62E1606D993000EE9A7 /* JTEditorSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTEditorSelectionView.m; sourceTree = "<group>"; };
+		9BB9C6311606E47A000EE9A7 /* TB_ViewSegment-Assistant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TB_ViewSegment-Assistant.png"; sourceTree = "<group>"; };
+		9BB9C6321606E47A000EE9A7 /* TB_ViewSegment-Basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TB_ViewSegment-Basic.png"; sourceTree = "<group>"; };
+		9BB9C6331606E47A000EE9A7 /* TB_ViewSegment-Versions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TB_ViewSegment-Versions.png"; sourceTree = "<group>"; };
 		DA37E2DB0E6291C8001BDFEF /* OMMiniXcode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMMiniXcode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +69,9 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9BB9C6311606E47A000EE9A7 /* TB_ViewSegment-Assistant.png */,
+				9BB9C6321606E47A000EE9A7 /* TB_ViewSegment-Basic.png */,
+				9BB9C6331606E47A000EE9A7 /* TB_ViewSegment-Versions.png */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 			);
 			name = Resources;
@@ -80,6 +92,8 @@
 				DA37E2DB0E6291C8001BDFEF /* OMMiniXcode.m */,
 				7FFE01F015FE1B3300CB8659 /* OMSchemeSelectionView.h */,
 				7FFE01F115FE1B3300CB8659 /* OMSchemeSelectionView.m */,
+				9BB9C62D1606D993000EE9A7 /* JTEditorSelectionView.h */,
+				9BB9C62E1606D993000EE9A7 /* JTEditorSelectionView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -93,6 +107,7 @@
 			buildPhases = (
 				8D5B49B1048680CD000E48DA /* Sources */,
 				8D5B49B3048680CD000E48DA /* Frameworks */,
+				9B0B92381608334D0066886C /* Resources */,
 			);
 			buildRules = (
 			);
@@ -131,6 +146,19 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		9B0B92381608334D0066886C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B0B923C160833660066886C /* TB_ViewSegment-Assistant.png in Resources */,
+				9B0B923D160833660066886C /* TB_ViewSegment-Basic.png in Resources */,
+				9B0B923E160833660066886C /* TB_ViewSegment-Versions.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8D5B49B1048680CD000E48DA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -138,6 +166,7 @@
 			files = (
 				DA37E2DC0E6291C8001BDFEF /* OMMiniXcode.m in Sources */,
 				7FFE01F215FE1B3300CB8659 /* OMSchemeSelectionView.m in Sources */,
+				9BB9C62F1606D993000EE9A7 /* JTEditorSelectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

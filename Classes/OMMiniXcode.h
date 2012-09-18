@@ -10,13 +10,18 @@
 #import <AppKit/AppKit.h>
 
 @class OMSchemeSelectionView;
+@class JTEditorSelectionView;
 
 @interface OMMiniXcode : NSObject {
-	
+	NSWindowController *_currentWindowController;
 }
+
+@property (assign) NSWindowController *currentWindowController;
 
 - (OMSchemeSelectionView *)schemePopUpButtonContainerForWindow:(NSWindow *)window;
 - (NSPopUpButton *)schemePopUpButtonForWindow:(NSWindow *)window;
+- (JTEditorSelectionView *)editorSegmentedControlContainerForWindow:(NSWindow *)window;
+- (NSSegmentedControl *)editorSegmentedControlForWindow:(NSWindow *)window;
 
 @end
 

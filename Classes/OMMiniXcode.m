@@ -8,12 +8,18 @@
 
 #import "OMMiniXcode.h"
 #import "OMSchemeSelectionView.h"
+#import "JTEditorSelectionView.h"
 
-#define SCHEME_POPUP_BUTTON_CONTAINER_TAG	456
-#define SCHEME_POPUP_BUTTON_TAG				457
-#define BUILD_PROGRESS_SPINNER_TAG			458
+#define SCHEME_POPUP_BUTTON_CONTAINER_TAG   456
+#define SCHEME_POPUP_BUTTON_TAG             457
+#define BUILD_PROGRESS_SPINNER_TAG          458
+#define EDITOR_CONTROL_CONTAINER_TAG        567
+#define EDITOR_CONTROL_WIDTH                100
+#define EDITOR_CONTROL_RIGHT_MARGIN         175
+#define EDITOR_CONTROL_TOP_MARGIN           23
 
 #define kOMMiniXcodeDisableSchemeSelectionInTitleBar	@"OMMiniXcodeDisableSchemeSelectionInTitleBar"
+#define kOMMiniXcodeDisableEditorSelectionInTitleBar	@"OMMiniXcodeDisableEditorSelectionInTitleBar"
 
 //TODO: Use the actual headers from class-dump
 
@@ -26,6 +32,8 @@
 
 
 @implementation OMMiniXcode
+
+@synthesize currentWindowController = _currentWindowController;
 
 
 + (void)pluginDidLoad:(NSBundle *)plugin
@@ -54,6 +62,10 @@
 			NSMenuItem *toggleSchemeInTitleBarItem = [[[NSMenuItem alloc] initWithTitle:@"Scheme Selection in Title Bar" action:@selector(toggleSchemeInTitleBar:) keyEquivalent:@""] autorelease];
 			[toggleSchemeInTitleBarItem setTarget:self];
 			[[viewMenuItem submenu] addItem:toggleSchemeInTitleBarItem];
+            
+			NSMenuItem *toggleEditorInTitleBarItem = [[[NSMenuItem alloc] initWithTitle:@"Editor Selection in Title Bar" action:@selector(toggleEditorInTitleBar:) keyEquivalent:@""] autorelease];
+			[toggleEditorInTitleBarItem setTarget:self];
+			[[viewMenuItem submenu] addItem:toggleEditorInTitleBarItem];
 		}
 		
 		[NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask handler:^NSEvent *(NSEvent *event) {
@@ -124,17 +136,43 @@
 	}
 	@catch (NSException *exception) { }
 }
+
+- (void)toggleEditorInTitleBar:(id)sender
+{
+	BOOL titleBarDisabled = [[NSUserDefaults standardUserDefaults] boolForKey:kOMMiniXcodeDisableEditorSelectionInTitleBar];
+	titleBarDisabled = !titleBarDisabled;
+	[[NSUserDefaults standardUserDefaults] setBool:titleBarDisabled forKey:kOMMiniXcodeDisableEditorSelectionInTitleBar];
+	
+	@try {
+		NSArray *workspaceWindowControllers = [NSClassFromString(@"IDEWorkspaceWindowController") workspaceWindowControllers];
+		for (NSWindow *window in [workspaceWindowControllers valueForKey:@"window"]) {
+			JTEditorSelectionView *editorView = [self editorSegmentedControlContainerForWindow:window];
+			BOOL toolbarVisible = [[window toolbar] isVisible];
+			if (editorView) {
+				[editorView setHidden:titleBarDisabled || toolbarVisible];
+			}
+		}
+	}
+	@catch (NSException *exception) { }
+}
 	
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
 	if ([menuItem action] == @selector(toggleSchemeInTitleBar:)) {
-		BOOL toolbarVisible = [[[NSApp keyWindow] toolbar] isVisible];
 		BOOL disabled = [[NSUserDefaults standardUserDefaults] boolForKey:kOMMiniXcodeDisableSchemeSelectionInTitleBar];
 		[menuItem setState:disabled ? NSOffState : NSOnState];
-		if (toolbarVisible) {
-			return NO;
-		}
 	}
+    
+    if ([menuItem action] == @selector(toggleEditorInTitleBar:)) {
+		BOOL disabled = [[NSUserDefaults standardUserDefaults] boolForKey:kOMMiniXcodeDisableEditorSelectionInTitleBar];
+		[menuItem setState:disabled ? NSOffState : NSOnState];
+	}
+    
+    BOOL toolbarVisible = [[[NSApp keyWindow] toolbar] isVisible];
+    if (toolbarVisible) {
+        return NO;
+    }
+    
 	return YES;
 }
 
@@ -174,6 +212,7 @@
 		BOOL titleBarDisabled = [[NSUserDefaults standardUserDefaults] boolForKey:kOMMiniXcodeDisableSchemeSelectionInTitleBar];
 		
 		NSWindow *window = splitView.window;
+        NSView *windowFrameView = [[window contentView] superview];
 		NSView *schemeView = [self schemePopUpButtonContainerForWindow:window];
 		if (schemeView) {
 			BOOL toolbarVisible = [[window toolbar] isVisible];
@@ -188,7 +227,15 @@
 				leftMostWidth = MIN(leftMostWidth, titleView.frame.origin.x - 20);
 			}
 			schemeView.frame = NSMakeRect(schemeView.frame.origin.x, schemeView.frame.origin.y, leftMostWidth - 80 + 20, schemeView.frame.size.height);
-		}
+        }
+        
+        NSView *editorSelectionView = [self editorSegmentedControlContainerForWindow:window];
+        if (editorSelectionView) {
+            BOOL toolbarVisible = [[window toolbar] isVisible];
+            BOOL titleBarDisabled = [[NSUserDefaults standardUserDefaults] boolForKey:kOMMiniXcodeDisableEditorSelectionInTitleBar];
+            [editorSelectionView setHidden:toolbarVisible || titleBarDisabled];
+            editorSelectionView.frame = NSMakeRect(windowFrameView.bounds.size.width - EDITOR_CONTROL_RIGHT_MARGIN, windowFrameView.bounds.size.height - EDITOR_CONTROL_TOP_MARGIN, EDITOR_CONTROL_WIDTH, 20);
+        }
 	}
 }
 
@@ -229,6 +276,17 @@
 			[schemeView setHidden:toolbarVisible || titleBarDisabled];
 		});
 	}
+    
+    NSView *editorSelectionView = [self editorSegmentedControlContainerForWindow:window];
+    if (editorSelectionView) {
+        double delayInSeconds = 0.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            BOOL toolbarVisible = [[window toolbar] isVisible];
+            BOOL titleBarDisabled = [[NSUserDefaults standardUserDefaults] boolForKey:kOMMiniXcodeDisableEditorSelectionInTitleBar];
+            [editorSelectionView setHidden:toolbarVisible || titleBarDisabled];
+        });
+    }
 }
 
 - (void)windowDidBecomeKey:(NSNotification *)notification
@@ -238,10 +296,22 @@
 		@try {
 			NSWindowController *windowController = [window windowController];
 			if ([windowController isKindOfClass:NSClassFromString(@"IDEWorkspaceWindowController")]) {
+                self.currentWindowController = windowController;
 				id workspace = [windowController valueForKey:@"_workspace"];
 				NSNotification *dummyNotification = [NSNotification notificationWithName:@"IDEWorkspaceBuildProductsLocationDidChangeNotification" object:workspace];
 				[self buildProductsLocationDidChange:dummyNotification];
 			}
+            
+            NSView *editorSelectionView = [self editorSegmentedControlContainerForWindow:window];
+            if (editorSelectionView) {
+                double delayInSeconds = 0.0;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    BOOL toolbarVisible = [[window toolbar] isVisible];
+                    BOOL titleBarDisabled = [[NSUserDefaults standardUserDefaults] boolForKey:kOMMiniXcodeDisableEditorSelectionInTitleBar];
+                    [editorSelectionView setHidden:toolbarVisible || titleBarDisabled];
+                });
+            }
 		}
 		@catch (NSException *exception) { }
 	}
@@ -327,6 +397,12 @@
 	return container.popUpButton;
 }
 
+- (NSSegmentedControl *)editorSegmentedControlForWindow:(NSWindow *)window
+{
+	JTEditorSelectionView *container = [self editorSegmentedControlContainerForWindow:window];
+	return container.editorSegmentedControl;
+}
+
 - (OMSchemeSelectionView *)schemePopUpButtonContainerForWindow:(NSWindow *)window
 {
 	if ([window isKindOfClass:NSClassFromString(@"IDEWorkspaceWindow")]) {
@@ -354,6 +430,53 @@
 		return popUpContainerView;
 	}
 	return nil;
+}
+
+- (JTEditorSelectionView *)editorSegmentedControlContainerForWindow:(NSWindow *)window
+{
+	if ([window isKindOfClass:NSClassFromString(@"IDEWorkspaceWindow")]) {
+		NSView *windowFrameView = [[window contentView] superview];
+		JTEditorSelectionView *controlContainerView = [windowFrameView viewWithTag:EDITOR_CONTROL_CONTAINER_TAG];
+        
+        if (self.currentWindowController) {
+            @try {
+                NSNumber *editorMode = [self.currentWindowController valueForKeyPath:@"editorArea.editorMode"];
+                controlContainerView.editorSegmentedControl.selectedSegment = [editorMode integerValue];
+            } @catch (NSException *exception) {}
+        }
+        
+		if (!controlContainerView) {
+            
+			controlContainerView = [[[JTEditorSelectionView alloc] initWithFrame:NSMakeRect(windowFrameView.bounds.size.width - EDITOR_CONTROL_RIGHT_MARGIN, windowFrameView.bounds.size.height - EDITOR_CONTROL_TOP_MARGIN, EDITOR_CONTROL_WIDTH, 20)] autorelease];
+			controlContainerView.tag = EDITOR_CONTROL_CONTAINER_TAG;
+			controlContainerView.autoresizingMask = NSViewMinYMargin;
+            
+            [controlContainerView.editorSegmentedControl setTarget:self];
+            [controlContainerView.editorSegmentedControl setAction:@selector(editorControllerSelected:)];
+			
+			BOOL toolbarVisible = [[window toolbar] isVisible];
+			BOOL titleBarDisabled = [[NSUserDefaults standardUserDefaults] boolForKey:kOMMiniXcodeDisableEditorSelectionInTitleBar];
+			
+			[controlContainerView setHidden:toolbarVisible || titleBarDisabled];
+			[windowFrameView addSubview:controlContainerView];
+			
+		}
+		return controlContainerView;
+	}
+	return nil;
+}
+
+- (void)editorControllerSelected:(id)sender
+{
+    NSSegmentedControl *segmentedControl = sender;
+    NSViewController *workspaceTabController = [self.currentWindowController valueForKeyPath:@"activeWorkspaceTabController"];
+    if (segmentedControl.selectedSegment == 0) {
+        [workspaceTabController performSelector:@selector(changeToStandardEditor:) withObject:nil];
+    } else if (segmentedControl.selectedSegment == 1) {
+        [workspaceTabController performSelector:@selector(changeToGeniusEditor:) withObject:nil];
+    } else if (segmentedControl.selectedSegment == 2) {
+        [workspaceTabController performSelector:@selector(changeToVersionEditor:) withObject:nil];
+    }
 }
 
 - (void)dealloc
