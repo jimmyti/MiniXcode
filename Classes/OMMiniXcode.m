@@ -14,9 +14,9 @@
 #define SCHEME_POPUP_BUTTON_TAG             457
 #define BUILD_PROGRESS_SPINNER_TAG          458
 #define EDITOR_CONTROL_CONTAINER_TAG        567
-#define EDITOR_CONTROL_WIDTH                100
-#define EDITOR_CONTROL_RIGHT_MARGIN         175
-#define EDITOR_CONTROL_TOP_MARGIN           23
+#define EDITOR_CONTROL_WIDTH                120
+#define EDITOR_CONTROL_RIGHT_MARGIN         155
+#define EDITOR_CONTROL_TOP_MARGIN           22
 
 #define kOMMiniXcodeDisableSchemeSelectionInTitleBar	@"OMMiniXcodeDisableSchemeSelectionInTitleBar"
 #define kOMMiniXcodeDisableEditorSelectionInTitleBar	@"OMMiniXcodeDisableEditorSelectionInTitleBar"
