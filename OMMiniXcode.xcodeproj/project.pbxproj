@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		7F2EB89C145057F200E97A87 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F2EB899145057EA00E97A87 /* AppKit.framework */; };
 		7FFE01F215FE1B3300CB8659 /* OMSchemeSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFE01F115FE1B3300CB8659 /* OMSchemeSelectionView.m */; };
-		9B0B923C160833660066886C /* TB_ViewSegment-Assistant.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB9C6311606E47A000EE9A7 /* TB_ViewSegment-Assistant.png */; };
-		9B0B923D160833660066886C /* TB_ViewSegment-Basic.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB9C6321606E47A000EE9A7 /* TB_ViewSegment-Basic.png */; };
-		9B0B923E160833660066886C /* TB_ViewSegment-Versions.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB9C6331606E47A000EE9A7 /* TB_ViewSegment-Versions.png */; };
 		9BB9C62F1606D993000EE9A7 /* JTEditorSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB9C62E1606D993000EE9A7 /* JTEditorSelectionView.m */; };
+		A52923921609F27C0045D6E4 /* IDEEditorModeToolbarViewController-Basic.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A529238F1609F27C0045D6E4 /* IDEEditorModeToolbarViewController-Basic.pdf */; };
+		A52923931609F27C0045D6E4 /* IDEEditorModeToolbarViewController-Genius.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A52923901609F27C0045D6E4 /* IDEEditorModeToolbarViewController-Genius.pdf */; };
+		A52923941609F27C0045D6E4 /* IDEEditorModeToolbarViewController-Versions.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A52923911609F27C0045D6E4 /* IDEEditorModeToolbarViewController-Versions.pdf */; };
 		DA1B5D020E64686800921439 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 089C1672FE841209C02AAC07 /* Foundation.framework */; };
 		DA37E2DC0E6291C8001BDFEF /* OMMiniXcode.m in Sources */ = {isa = PBXBuildFile; fileRef = DA37E2DB0E6291C8001BDFEF /* OMMiniXcode.m */; };
 /* End PBXBuildFile section */
@@ -30,6 +30,9 @@
 		9BB9C6311606E47A000EE9A7 /* TB_ViewSegment-Assistant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TB_ViewSegment-Assistant.png"; sourceTree = "<group>"; };
 		9BB9C6321606E47A000EE9A7 /* TB_ViewSegment-Basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TB_ViewSegment-Basic.png"; sourceTree = "<group>"; };
 		9BB9C6331606E47A000EE9A7 /* TB_ViewSegment-Versions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TB_ViewSegment-Versions.png"; sourceTree = "<group>"; };
+		A529238F1609F27C0045D6E4 /* IDEEditorModeToolbarViewController-Basic.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "IDEEditorModeToolbarViewController-Basic.pdf"; sourceTree = "<group>"; };
+		A52923901609F27C0045D6E4 /* IDEEditorModeToolbarViewController-Genius.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "IDEEditorModeToolbarViewController-Genius.pdf"; sourceTree = "<group>"; };
+		A52923911609F27C0045D6E4 /* IDEEditorModeToolbarViewController-Versions.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "IDEEditorModeToolbarViewController-Versions.pdf"; sourceTree = "<group>"; };
 		DA37E2DB0E6291C8001BDFEF /* OMMiniXcode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMMiniXcode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +75,9 @@
 				9BB9C6311606E47A000EE9A7 /* TB_ViewSegment-Assistant.png */,
 				9BB9C6321606E47A000EE9A7 /* TB_ViewSegment-Basic.png */,
 				9BB9C6331606E47A000EE9A7 /* TB_ViewSegment-Versions.png */,
+				A529238F1609F27C0045D6E4 /* IDEEditorModeToolbarViewController-Basic.pdf */,
+				A52923901609F27C0045D6E4 /* IDEEditorModeToolbarViewController-Genius.pdf */,
+				A52923911609F27C0045D6E4 /* IDEEditorModeToolbarViewController-Versions.pdf */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 			);
 			name = Resources;
@@ -151,9 +157,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B0B923C160833660066886C /* TB_ViewSegment-Assistant.png in Resources */,
-				9B0B923D160833660066886C /* TB_ViewSegment-Basic.png in Resources */,
-				9B0B923E160833660066886C /* TB_ViewSegment-Versions.png in Resources */,
+				A52923921609F27C0045D6E4 /* IDEEditorModeToolbarViewController-Basic.pdf in Resources */,
+				A52923931609F27C0045D6E4 /* IDEEditorModeToolbarViewController-Genius.pdf in Resources */,
+				A52923941609F27C0045D6E4 /* IDEEditorModeToolbarViewController-Versions.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

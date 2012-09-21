@@ -22,18 +22,21 @@
         [_editorSegmentedControl setSegmentStyle:NSSegmentStyleTexturedSquare];
         [_editorSegmentedControl setSegmentCount:3];
         
-        NSString *imageFilePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"TB_ViewSegment-Basic" ofType:@"png"];
+        NSString *imageFilePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"IDEEditorModeToolbarViewController-Basic" ofType:@"pdf"];
         NSImage *image = [[NSImage alloc] initWithContentsOfFile:imageFilePath];
         [_editorSegmentedControl setImage:image forSegment:0];
         [_editorSegmentedControl setImageScaling:NSImageScaleProportionallyDown forSegment:0];
-        imageFilePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"TB_ViewSegment-Assistant" ofType:@"png"];
+		
+        imageFilePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"IDEEditorModeToolbarViewController-Genius" ofType:@"pdf"];
         image = [[NSImage alloc] initWithContentsOfFile:imageFilePath];
         [_editorSegmentedControl setImage:image forSegment:1];
         [_editorSegmentedControl setImageScaling:NSImageScaleProportionallyDown forSegment:1];
-        imageFilePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"TB_ViewSegment-Versions" ofType:@"png"];
+		
+        imageFilePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"IDEEditorModeToolbarViewController-Versions" ofType:@"pdf"];
         image = [[NSImage alloc] initWithContentsOfFile:imageFilePath];
         [_editorSegmentedControl setImage:image forSegment:2];
         [_editorSegmentedControl setImageScaling:NSImageScaleProportionallyDown forSegment:2];
+		
         [self addSubview:_editorSegmentedControl];
     }
     
