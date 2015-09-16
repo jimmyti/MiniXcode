@@ -6,13 +6,13 @@ This is a plugin that makes it easier to run Xcode without the main toolbar. It 
 
 You can disable the popup from the _View_ menu if you find it distracting, the keyboard shortcuts will also work without it. The popup is automatically hidden when the main toolbar is visible.
 
-![Screenshot](http://github.com/omz/MiniXcode/raw/master/Screenshot.png)
+![Screenshot](/Screenshot.png?raw=true)
 
 ## New feature: Support editor mode selection
 
 You can now change the editor mode in Xcode via the small segmented control towards the right of the title bar. It is designed to mimic the standard editor mode switcher arrangement - standard editor, assistant editor, versions editor.
 
-![Screenshot](http://github.com/jimmyti/MiniXcode/raw/master/Screenshot-editorMode.png)
+![Editor mode selection screenshot](/Screenshot-editorMode.png?raw=true)
 
 ## Installation
 
